@@ -15,9 +15,11 @@ class myBinarySearchTreeNode{
     /// by inserting elements into the tree in the order they are given in A.
 
     myBinarySearchTreeNode numValue = new myBinarySearchTreeNode(A[0]);
+    myValue= A[0];
 
     for(int i = 0; i < A.length; i++){
       numValue.insert(A[i]);
+      insert(A[i]);
     }
 
   } //completed
@@ -31,21 +33,24 @@ class myBinarySearchTreeNode{
     //    * or in the right subtree.
     // If the value already exists in the tree, no action is taken.
 
+      //insert for right value
     if(inValue > myValue){
       if(right == null){
         right = new myBinarySearchTreeNode(inValue);
       }else{
         right.insert(inValue);
       }
-    }else if (inValue <= myValue){
+      //insert for left value
+    }else if (inValue < myValue){
       if(left == null){
         left = new myBinarySearchTreeNode (inValue);
       }else{
         left.insert(inValue);
       }
-    }else if(inValue == myValue){
-      System.out.println("Error. No duplicates!");
-    }
+      //no duplicates
+    }//else {
+     // System.out.println("Error. No duplicates!");
+    //}
   }//completed
   
   public int height(){
@@ -54,11 +59,14 @@ class myBinarySearchTreeNode{
         int leftSide = left.height();
         int rightSide = right.height();
 
-        if(leftSide > rightSide){
+        if(left != null){
             return leftSide +1;
-        }else{
+        }
+        if(right != null){
             return rightSide +1;
         }
+
+        return Math.max(leftSide+1, rightSide+1);
   } //complete
 
   public int size(){
@@ -80,13 +88,31 @@ class myBinarySearchTreeNode{
      // Additionally, remember that the depth is the number of nodes on the path from a node to the root 
      // (i.e. the number of the recursive calls).
 
+      //compare current number to value
       if(search < myValue){
-          return left.depth(search) +1;
+          //if there is a value there go left
+          if(left != null){
+              //if it's not in the tree return -1
+              if(left.depth(search) != myValue){
+                  return -1;
+              }else{
+                  //else sum up the number of edges on the left
+                  return left.depth(search) + 1;
+              }
+          }
       }else if(search > myValue){
-          return right.depth(search);
+          //if there is a value there go right
+          if(right != null){
+              //if it's not in the tree return -1
+              if(right.depth(search) != myValue){
+                  return -1;
+              }else{
+                  //else sum up the number of edges on the right
+                  return right.depth(search)+1;
+              }
+          }
       }
-
-    return -1;
+    return 0;
   }//complete
 
 
