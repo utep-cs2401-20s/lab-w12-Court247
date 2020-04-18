@@ -56,17 +56,19 @@ class myBinarySearchTreeNode{
   public int height(){
      // This method recursively calculates the height of the entire (sub)tree.
      // This method will take O(n) time
-        int leftSide = left.height();
-        int rightSide = right.height();
+        int leftSide = 0;
+        int rightSide = 0;
 
         if(left != null){
-            return leftSide +1;
+            leftSide = left.height() +1;
+            return leftSide;
         }
         if(right != null){
-            return rightSide +1;
+            rightSide = right.height() +1;
+            return rightSide;
         }
 
-        return Math.max(leftSide+1, rightSide+1);
+        return Math.max(leftSide, rightSide);
   } //complete
 
   public int size(){
@@ -76,7 +78,7 @@ class myBinarySearchTreeNode{
       }
 
       if(right != null){
-          sum += right.size() + left.size();
+          sum += right.size();
       }
       return sum;
   } //complete
@@ -92,27 +94,21 @@ class myBinarySearchTreeNode{
       if(search < myValue){
           //if there is a value there go left
           if(left != null){
-              //if it's not in the tree return -1
-              if(left.depth(search) != myValue){
-                  return -1;
-              }else{
-                  //else sum up the number of edges on the left
-                  return left.depth(search) + 1;
-              }
+             //else sum up the number of edges on the left
+              return 1 + left.depth(search);
           }
       }else if(search > myValue){
           //if there is a value there go right
           if(right != null){
-              //if it's not in the tree return -1
-              if(right.depth(search) != myValue){
-                  return -1;
-              }else{
-                  //else sum up the number of edges on the right
-                  return right.depth(search)+1;
-              }
+              //else sum up the number of edges on the right
+              return 1 + right.depth(search);
           }
+      }else {
+          //found myValue
+          return 0;
       }
-    return 0;
+      //didn't find my value
+    return -1;
   }//complete
 
 

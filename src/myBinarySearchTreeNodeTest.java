@@ -36,5 +36,42 @@ public class myBinarySearchTreeNodeTest {
 
     }//passed
 
-    
+    @Test
+    public void Tree3(){ //testing the height so we know that it's coded correctly
+        myBinarySearchTreeNode tree = new myBinarySearchTreeNode(6);
+        tree.insert(4);
+        tree.insert(8);
+        tree.insert(10);
+        tree.print();
+
+        assertEquals(1, tree.height());
+    }//passed
+
+    @Test
+    public void Tree4(){ // testing the size to make sure it's all calculated right.
+        myBinarySearchTreeNode tree = new myBinarySearchTreeNode(5);
+        tree.insert(10);
+        tree.insert(-1);
+        tree.insert(3);
+        tree.insert(6);
+        tree.print();
+
+        assertEquals(5, tree.size());
+
+    }//passed
+
+    @Test
+    public void Tree5(){ //testing depth method
+        myBinarySearchTreeNode tree = new myBinarySearchTreeNode(5);
+        tree.insert(10);
+        tree.insert(-3);
+        tree.insert(3);
+        tree.insert(6);
+        tree.print();
+
+        assertEquals(0, tree.depth(10));
+
+    }
+
+
 }
